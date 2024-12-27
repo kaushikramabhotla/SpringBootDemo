@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+import java.sql.Date;
 import java.util.List;
 
 @RestController
@@ -35,6 +37,18 @@ public class ProductController {
             return new ResponseEntity<>(product,HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @RequestMapping("/addProduct")
+    public String addProduct(){
+        Product p = new Product(6, "kau", "kau", "kau", new BigDecimal(2.55), "kau", new Date(2000, 12, 12), true, 5);
+
+        productService.addProduct(p);
+        return "Success";
+    }
+    @GetMapping("/hello")
+    public String getHello(){
+        return "helloo";
     }
 
     @DeleteMapping("/product/{id}")
